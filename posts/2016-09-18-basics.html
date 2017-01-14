@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basics - Styx Site</title>
+<link href="https://styx-static.github.io/styx-theme-hyde/feed.xml" rel="alternate" type="application/atom+xml" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/poole.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/syntax.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/hyde.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" rel="stylesheet" type="text/css" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.png">
+</head>
+<body class="">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://styx-static.github.io/styx-theme-hyde/"><h1>Styx Site</h1></a>
+      <p class="lead">An elegant open source and mobile first theme for styx made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://styx-static.github.io/styx-theme-hyde/">Home</a></li>
+      <li><a href="https://styx-static.github.io/styx-theme-hyde/about.html">About</a></li>
+
+    </ul>
+
+    <p>&copy; 2016. All rights reserved.</p>
+  </div>
+</div>
+<div class="content container">
+<div class="post">
+  <h1>Basics</h1>
+  <span class="post-date">18 Sep 2016</span>
+  <p>Styx is a static site generator based on the Nix package manager.</p>
+
+<p>Styx has the following features:</p>
+
+<ul>
+<li>Themes</li>
+<li>Clean separation of concerns</li>
+<li>Flexibility</li>
+<li>Markdown and AsciiDoc file support</li>
+<li>Content metadata</li>
+</ul>
+
+<h2 id="cleanseparationofconcerns">Clean separation of concerns</h2>
+
+<p>Styx has a clean separation of concerns.</p>
+
+<p>on a file level:</p>
+
+<ul>
+<li><code>site.nix</code> handles all the logic of the site generation.</li>
+<li><code>conf.nix</code> manage the theme and other settings.</li>
+<li><code>themes</code> manage templates and static files.</li>
+<li>Every data is managed in its own file.</li>
+</ul>
+
+<p>On a logical level, in <code>site.nix</code>:</p>
+
+<ul>
+<li>The <code>data</code> section handle external data fetching.</li>
+<li>The <code>pages</code> section handle the page generation from data or from scratch.</li>
+</ul>
+
+<p>To preview the site after a change, the <code>styx preview</code> command ca be used.</p>
+
+<p>Other posts will introduce <code>themes</code>, <code>data</code> and <code>pages</code>.</p>
+
+<h2 id="flexibility">Flexibility</h2>
+
+<p>Styx does not enforce any data or site structure. You are totally free to do whatever you want.</p>
+
+<p>Also, the site generation function provides hooks that allow even more use cases, Styx site use the <code>postGen</code> to generate every styx version documentation.</p>
+
+<p>For more details refer to the <a href="https://styx-static.github.io/styx-site/documentation.html#_basics">basics</a> chapter of styx documentation.</p>
+
+
+   
+</div>
+
+</div>
+</body>
+</html>

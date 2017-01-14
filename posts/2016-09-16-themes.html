@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Themes - Styx Site</title>
+<link href="https://styx-static.github.io/styx-theme-hyde/feed.xml" rel="alternate" type="application/atom+xml" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/poole.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/syntax.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/hyde.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" rel="stylesheet" type="text/css" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.png">
+</head>
+<body class="">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://styx-static.github.io/styx-theme-hyde/"><h1>Styx Site</h1></a>
+      <p class="lead">An elegant open source and mobile first theme for styx made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://styx-static.github.io/styx-theme-hyde/">Home</a></li>
+      <li><a href="https://styx-static.github.io/styx-theme-hyde/about.html">About</a></li>
+
+    </ul>
+
+    <p>&copy; 2016. All rights reserved.</p>
+  </div>
+</div>
+<div class="content container">
+<div class="post">
+  <h1>Themes</h1>
+  <span class="post-date">16 Sep 2016</span>
+  <p>Themes are the main way to customize Styx sites. This post introduce themes basics.</p>
+
+<p>Themes can provide the following:</p>
+
+<ul>
+<li>Template files</li>
+<li>Static files</li>
+<li>A configuration interface</li>
+<li>An example site</li>
+<li>A function library</li>
+</ul>
+
+<h2 id="previewingatheme">Previewing a theme</h2>
+
+<p>Previewing a theme fom the <code>styx-themes</code> package set is very easy, the following will launch the preview site for the showcase theme.</p>
+
+<pre><code>$ styx preview --in $(nix-build -A styx-themes.showcase '&lt;nixpkgs&gt;')/example
+</code></pre>
+
+<h2 id="usingatheme">Using a theme</h2>
+
+<p>It just require to add the theme to <code>site.nix</code> <code>themes</code> list to use a theme.<br/>
+Themes from the <code>styx-themes</code> package or local themes can be used and combined.</p>
+
+<pre><code>  /* list the themes to load, paths or packages can be used
+     items at the end of the list have higher priority
+  */
+  themes = [
+    styx-themes.generic-templates
+    ./themes/my-theme
+  ];
+</code></pre>
+
+<h2 id="customizingthemes">Customizing themes</h2>
+
+<h3 id="configurationinterface">Configuration interface</h3>
+
+<p>The main way to customize a theme is by using the configuration interface.</p>
+
+<p>Every theme expose some of its functionality to various degrees in the <code>themes/THEME/conf.nix</code> file.
+A theme <code>conf.nix</code> is usually commented or theme documentation is available in another file such as <code>themes/THEME/readme.md</code>.</p>
+
+<p>Let&#8217;s say that the theme exposes a <code>site.title</code> option to change the site title. To change this option you need edit the <em>site</em> <code>conf.nix</code> file (in the site root) in the following manner:</p>
+
+<pre><code>{
+  theme.site.title = &quot;My Site&quot;;
+}
+</code></pre>
+
+<h3 id="extendingthemes">Extending themes</h3>
+
+<p>To change a template or a file provided by a theme, you do not need to edit it! You can just &#8220;extend&#8221; the theme.</p>
+
+<p>Extending a theme consist in creating a new theme with only the files you want to override from an other theme.</p>
+
+<p>Let&#8217;s say you want to extend the <code>generic-templates</code> theme <code>templates.partials.head.css-custom</code> template to load <code>themes/my-theme/files/css/style.css</code>.<br/>
+First we need to create a new theme, the <code>new theme</code> command can create a theme folder structure:</p>
+
+<pre><code>$ styx new theme my-theme --in ./themes
+</code></pre>
+
+<p>Next we just need to add <code>my-theme</code> to the themes list in <code>site.nix</code>:</p>
+
+<pre><code>  themes = [
+    styx-themes.generic-templates
+    ./themes/my-theme
+  ]; 
+</code></pre>
+
+<p>Then create a <code>themes/my-theme/templates/partials/head/css-custom.nix</code> with the following code to load <code>themes/my-theme/files/css/style.css</code>.</p>
+
+<pre><code>{ templates, ... }:
+args:
+templates.tag.link-css { href = templates.url &quot;/css/style.css&quot;; }
+</code></pre>
+
+<p>For more details refer to the <a href="https://styx-static.github.io/styx-site/documentation.html#Themes">themes</a> chapter of styx documentation.</p>
+
+
+   
+</div>
+
+</div>
+</body>
+</html>
