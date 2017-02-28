@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Embedded media - Styx Site</title>
+<link href="https://styx-static.github.io/styx-theme-hyde/feed.xml" rel="alternate" type="application/atom+xml" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/poole.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/syntax.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/hyde.css" rel="stylesheet" type="text/css" />
+<link href="https://styx-static.github.io/styx-theme-hyde/css/hyde-styx.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" rel="stylesheet" type="text/css" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.png">
+</head>
+<body class="">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://styx-static.github.io/styx-theme-hyde/"><h1>Styx Site</h1></a>
+      <p class="lead">An elegant open source and mobile first theme for styx made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="https://styx-static.github.io/styx-theme-hyde/">Home</a></li>
+      <li><a href="https://styx-static.github.io/styx-theme-hyde/about.html">About</a></li>
+
+    </ul>
+
+    <p>&copy; 2017. All rights reserved. 
+</p>
+  </div>
+</div>
+<div class="content container">
+<div class="post">
+  <h1>Embedded media</h1>
+  <span class="post-date">17 Sep 2016</span>
+  <p>The generic templates template theme provide templates that can be used in content to embed external media.</p>
+
+<p>To use the generic template theme add it to the themes list of <code>site.nix</code>:</p>
+
+<pre><code class="nix">  themes = [
+    styx-themes.generic-templates
+  ];
+</code></pre>
+
+<h2 id="youtubevideos">Youtube videos</h2>
+
+<pre><code class="nix">{{ templates.media.youtube { id = &quot;YbUPdv03ciI&quot;; } }}
+</code></pre>
+
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/YbUPdv03ciI?ecver=1" frameborder="0" allowfullscreen></iframe></p>
+
+<h2 id="vimeovideos">Vimeo videos</h2>
+
+<pre><code class="nix">{{ templates.media.vimeo { id = &quot;124510855&quot;; } }}
+</code></pre>
+
+<p><iframe src="https://player.vimeo.com/video/124510855" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></p>
+
+<h2 id="speackerdeckpresentation">Speacker deck presentation</h2>
+
+<pre><code class="nix">{{ templates.media.speakerdeck { id = &quot;0c32d0d17488429eaf6bc3278c1d0fc8&quot;; } }}
+</code></pre>
+
+<script async="async" class="speakerdeck-embed" data-id="0c32d0d17488429eaf6bc3278c1d0fc8" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<h2 id="githubgists">GitHub Gists</h2>
+
+<pre><code class="nix">{{ templates.media.gist { user = &quot;dmalikov&quot;; id = &quot;613fa59063604e51d323&quot;; } }}
+</code></pre>
+
+<script src="https://gist.github.com/dmalikov/613fa59063604e51d323.js"></script>
+
+<h2 id="giphy">Giphy</h2>
+
+<pre><code class="nix">{{ templates.media.giphy { id = &quot;4yh9SoRl7QLjW&quot;; height = 360; width = 480; } }}
+</code></pre>
+
+<p><iframe src="//giphy.com/embed/4yh9SoRl7QLjW" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
+
+<h2 id="slideshare">Slide share</h2>
+
+<pre><code class="nix">{{ templates.media.slideshare { embedCode = &quot;60836660&quot;; } }}
+</code></pre>
+
+<p><iframe src='https://www.slideshare.net/slideshow/embed_code/60836660' width='640' height='480' allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></p>
+
+<h2 id="twitter">Twitter</h2>
+
+<pre><code>{{ templates.media.twitter { user = &quot;nixos_org&quot;; height = 600; } }}
+</code></pre>
+
+<p><a class="twitter-timeline" data-height="600" href="https://twitter.com/nixos_org">Tweets by nixos_org</a>
+ <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> </p>
+
+
+   
+</div>
+
+</div>
+<script crossorigin="anonymous" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<script crossorigin="anonymous" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/nix.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

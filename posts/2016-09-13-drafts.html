@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pages - Styx Site</title>
+<title>Drafts - Styx Site</title>
 <link href="https://styx-static.github.io/styx-theme-hyde/feed.xml" rel="alternate" type="application/atom+xml" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css" rel="stylesheet" type="text/css" />
 <link href="https://styx-static.github.io/styx-theme-hyde/css/poole.css" rel="stylesheet" type="text/css" />
@@ -36,59 +36,49 @@
 </div>
 <div class="content container">
 <div class="post">
-  <h1>Pages</h1>
-  <span class="post-date">14 Sep 2016</span>
-  <p>In <code>site.nix</code>, a page is declared as an attribute set in the <code>pages</code> attribute, example:</p>
+  <h1>Drafts</h1>
+  <span class="post-date">13 Sep 2016</span>
+  <p>Styx provides two approaches to manage draft content:</p>
 
-<pre><code class="nix">pages = {
-  about = {
-    path     = &quot;/about.html&quot;;
-    template = templates.page.full;
-    layout   = templates.layout;
-  } // data.about;
+<ul>
+<li>Metadata</li>
+<li>Directories</li>
+</ul>
+
+<h2 id="usingmetadata">Using metadata</h2>
+
+<p>By using a <code>draft</code> metadata key, it possible to set a markup file to be draft data:</p>
+
+<pre><code class="markdown">{---
+draft = true;
+---}
+
+## Lorem ipsum
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</code></pre>
+
+<p>Then, the drafts will automatically be filtered when loading the data in <code>site.nix</code> when <code>loadDir</code> is used.</p>
+
+<pre><code class="nix">data = {
+  posts = sortBy &quot;date&quot; &quot;dsc&quot; (loadDir { dir = ./path/to/posts; inherit env; });
 };
 </code></pre>
 
-<p>Note: This example merges a data set in the page set, this is usual way to create pages from data.</p>
+<p>This is the recommended solution as it is the easiest to set in place.</p>
 
-<h2 id="basics">Basics</h2>
+<h2 id="splittingdirectories">Splitting directories</h2>
 
-<p>During site generation, styx evaluates <code>generatePage</code> on each <code>pages</code> page.<br/>
-<code>generatePage</code> definition is <code>page: pages.layout (page.template page)</code>, it simply evaluates a page set by its template, and evaluate that result with the layout.<br/>
-The generated page content is output in the page <code>path</code> file.</p>
+<p>In this approach, drafts are in a separate directory.</p>
 
-<p>A simple example of a page is:</p>
-
-<pre><code class="nix">pages = {
-  hello = {
-    layout = template: &quot;&lt;html&gt;&lt;body&gt;${template}&lt;/body&gt;&lt;/html&gt;&quot;;
-    template = page: ''
-      &lt;h1&gt;Styx example page&lt;/h1&gt;
-      ${page.content}
-    '';
-    content = &quot;&lt;p&gt;Hello world!&lt;/p&gt;&quot;;
-    path = &quot;/hello.html&quot;;
-  };
-}
+<pre><code class="nix">data = {
+  posts  = let
+    drafts = loadDir { dir = ./path/to/drafts; inherit env; draft = true; });
+    posts  = optionals (conf.renderDrafts == true)
+               (loadDir { dir = ./path/to/posts;  inherit env; });
+  in sortBy &quot;date&quot; &quot;dsc&quot; (posts ++ drafts);
+};
 </code></pre>
-
-<p>Will generate <code>/hello.html</code> with the following contents:</p>
-
-<pre><code class="html">&lt;html&gt;&lt;body&gt;&lt;h1&gt;Styx example page&lt;/h1&gt;
-&lt;p&gt;Hello world!&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;
-</code></pre>
-
-<h2 id="helperfunctions">Helper functions</h2>
-
-<p>The standard library provide helper functions to generate multiple type of pages:</p>
-
-<ul>
-<li><code>mkSplit</code>: to split a data list between multiple pages, used to create archive like pages.</li>
-<li><code>mkPageList</code>: to generate a list of pages from a list of data.</li>
-<li><code>mkMultipages</code>: to split a multipage data between multiple pages.</li>
-<li><code>mkTaxonomyPages</code>: to generate taxonomy pages from taxonomy data.</li>
-</ul>
 
 
    
